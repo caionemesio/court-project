@@ -8,13 +8,16 @@ import "@fontsource/roboto/700.css";
 import RouterApp from "./routes/RouterApp.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { BrowserRouter } from "react-router-dom";
+import { StyledEngineProvider } from "@mui/material";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <RouterApp />
-      </AuthProvider>
-    </BrowserRouter>
+    <StyledEngineProvider injectFirst>
+      <BrowserRouter>
+        <AuthProvider>
+          <RouterApp />
+        </AuthProvider>
+      </BrowserRouter>
+    </StyledEngineProvider>
   </StrictMode>
 );

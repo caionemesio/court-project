@@ -16,8 +16,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     if (token && storedUser) {
       setUser(storedUser);
-    } else {
-      navigate("/");
     }
   }, [navigate]);
 

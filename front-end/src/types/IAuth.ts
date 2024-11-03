@@ -1,6 +1,5 @@
 interface IProtectedRouteProps {
-  path: string;
-  element: JSX.Element;
+  children: React.ReactNode;
   allowedRoles: ("admin" | "user")[];
 }
 interface IUser {

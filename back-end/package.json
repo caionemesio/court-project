@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx dotenv-cli -e .env -- ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/infrastructure/http/server.ts"
+    "dev": "npx dotenv-cli -e .env -- ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/infrastructure/http/server.ts",
+    "docker": "docker-compose up -d"
+  },
+  "prisma": {
+    "schema": "./src/infrastructure/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",

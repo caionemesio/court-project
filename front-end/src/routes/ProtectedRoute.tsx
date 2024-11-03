@@ -9,7 +9,7 @@ export const ProtectedRoute = ({
   const authContext = useAuth();
   const user = authContext?.user;
   if (!user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (!allowedRoles.includes(user.role)) {

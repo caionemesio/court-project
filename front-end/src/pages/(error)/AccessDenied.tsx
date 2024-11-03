@@ -1,9 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import AccessDeniedImage from "../../assets/images/access_denied.png";
+import UnauthContainer from "../../components/containers/UnauthContainer";
 
 export default function AccessDenied() {
   return (
-    <Box>
-      <Typography variant="h1">Acess Denied</Typography>
-    </Box>
+    <UnauthContainer
+      imageUrl={AccessDeniedImage}
+      title="Acesso negado"
+      subtitle="Você não tem permissão para acessar esta página. Por favor volte para página principal."
+    />
   );
 }

@@ -4,6 +4,7 @@ import 'express-async-errors'
 import { env } from '../env'
 import userRouter from './routes/user-route'
 import { ErrorHandler } from './middleware/errorHandler'
+import scheduleRouter from './routes/schedule-route'
 
 const app = express()
 
@@ -11,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use(userRouter)
-
+app.use(scheduleRouter)
 app.use(ErrorHandler)
 
 app.listen(3000, () => {

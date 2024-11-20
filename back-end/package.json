@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx dotenv-cli -e .env -- ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/infrastructure/http/server.ts",
-    "docker": "docker-compose up -d"
+    "docker": "docker-compose up -d",
+    "seed": "npx prisma db seed",
+    "clear": "ts-node --transpile-only ./src/infrastructure/prisma/clear.ts"
   },
   "prisma": {
-    "schema": "./src/infrastructure/prisma/schema.prisma"
+    "schema": "./src/infrastructure/prisma/schema.prisma",
+    "seed": "ts-node --transpile-only ./src/infrastructure/prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

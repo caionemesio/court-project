@@ -1,4 +1,4 @@
-import { PrismaClient, Schedule } from '@prisma/client'
+import { PrismaClient, Schedule, Status } from '@prisma/client'
 import { IScheduleRepositoryInterface } from './schedule.repository.interface'
 
 const prisma = new PrismaClient()
@@ -106,6 +106,19 @@ export class ScheduleRepository implements IScheduleRepositoryInterface {
       },
     })
     return schedule
+  }
+
+  updateStatus(id: string, status: Status): Promise<Schedule> {
+    const newStatus = prisma.schedule.update({
+      where: {
+        id: id,
+      },
+      data: {
+        status: status,
+      },
+    })
+
+    return newStatus
   }
 
   async delete(id: string): Promise<void> {

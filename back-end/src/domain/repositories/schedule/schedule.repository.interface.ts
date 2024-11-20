@@ -21,4 +21,5 @@ export interface IScheduleRepositoryInterface extends IRepository<Schedule> {
       sport: string
     },
   ): Promise<Schedule>
+  updateStatus(id: string, status: string): Promise<Schedule>
 }

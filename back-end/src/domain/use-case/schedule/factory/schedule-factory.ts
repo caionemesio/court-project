@@ -5,6 +5,7 @@ import { FindAllSchedulesUseCase } from '../findAllSchedulesUseCase'
 import { FindByIdUseCase } from '../findByIdUseCase'
 import { DeleteScheduleUseCase } from '../deleteScheduleUseCase'
 import { UpdateScheduleUseCase } from '../updateScheduleUseCase'
+import { UpdateStatusOfScheduleUseCase } from '../updateStatusOfScheduleUseCase'
 
 export const makeScheduleController = (): ScheduleController => {
   const schedule = new ScheduleRepository()
@@ -13,6 +14,9 @@ export const makeScheduleController = (): ScheduleController => {
   const findByIdScheduleUseCase = new FindByIdUseCase(schedule)
   const updateScheduleUseCase = new UpdateScheduleUseCase(schedule)
   const deleteScheduleUseCase = new DeleteScheduleUseCase(schedule)
+  const updateStatusOfScheduleUseCase = new UpdateStatusOfScheduleUseCase(
+    schedule,
+  )
 
   return new ScheduleController(
     createScheduleUseCase,
@@ -20,5 +24,6 @@ export const makeScheduleController = (): ScheduleController => {
     findByIdScheduleUseCase,
     deleteScheduleUseCase,
     updateScheduleUseCase,
+    updateStatusOfScheduleUseCase,
   )
 }

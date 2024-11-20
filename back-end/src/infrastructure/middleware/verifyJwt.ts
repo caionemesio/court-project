@@ -3,8 +3,9 @@ import Jwt from 'jsonwebtoken'
 import { env } from '../env'
 import { Unauthorized } from '@/domain/error/unauthorized'
 
-interface DecodedToken {
+export interface DecodedToken {
   id: string
+  role: string
 }
 
 export const verifyJwt = (
@@ -16,7 +17,7 @@ export const verifyJwt = (
   const token = authHeader?.split(' ')[1]
 
   if (!token) {
-    throw new Unauthorized('Unauthorized')
+    throw new Unauthorized('Token not provided')
   }
 
   try {
@@ -24,13 +25,10 @@ export const verifyJwt = (
     const decoded = Jwt.verify(token, secret) as DecodedToken
 
     req.user = decoded
-    if (!req.user.id) {
-      throw new Unauthorized('Unauthorized')
-    }
 
     next()
   } catch (error) {
-    throw new Unauthorized('Unauthorized')
-    console.error(error)
+    console.log(error)
+    throw new Unauthorized('Invalid token')
   }
 }

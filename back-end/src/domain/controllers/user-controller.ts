@@ -74,9 +74,13 @@ export default class UserController {
         password,
       })
       user.password = undefined
-      const token = Jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: '1d',
-      })
+      const token = Jwt.sign(
+        { id: user.id, role: user.role },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '1d',
+        },
+      )
 
       return res.status(200).json({ user, token })
     } catch (error) {

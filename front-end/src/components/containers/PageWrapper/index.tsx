@@ -18,23 +18,26 @@ export default function PageWrapper({
     },
     {
       title: "user",
-      path: "/home",
+      path: "/",
     },
   ];
   const navigate = useNavigate();
 
   return (
     <>
-      <AppBar position="static" className="bg-transparent">
+      <AppBar
+        position="static"
+        className="bg-transparent flex-row items-center justify-between p-4"
+      >
         <IconButton edge="start" aria-label="menu">
           <Box component="img" src={LogoUninassau} alt="Logo Uninassau" />
         </IconButton>
-        <Box className="flex justify-end">
+        <Box className="flex gap-8">
           {routes.map((route) => (
             <Typography
               key={route.path}
               onClick={() => navigate(route.path)}
-              className="cursor-pointer"
+              className="cursor-pointer text-slate-950"
             >
               {route.title}
             </Typography>

@@ -13,7 +13,7 @@ export const ProtectedRoute = ({
   }
 
   if (!allowedRoles.includes(user.role)) {
-    return <Navigate to="/access-denied" replace />;
+    return <Navigate to="/acesso-negado" replace />;
   }
 
   return children;

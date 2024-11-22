@@ -1,13 +1,13 @@
 import { Outlet, useLocation } from "react-router-dom";
 import PageWrapper from "../components/containers/PageWrapper";
+import { validsRoutes } from "./validsRoutes";
 
 const Layout = () => {
   const location = useLocation();
-  const noLayoutRoutes = ["/access-denied", "*"];
 
-  const isNotFoundRoute = location.pathname === "/not-found";
-  const shouldRenderLayout =
-    !noLayoutRoutes.includes(location.pathname) && !isNotFoundRoute;
+  const layoutRoutes = validsRoutes.map((route) => route.path);
+
+  const shouldRenderLayout = layoutRoutes.includes(location.pathname);
 
   return shouldRenderLayout ? (
     <PageWrapper>

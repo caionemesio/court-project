@@ -34,9 +34,12 @@
  *                     type: string
  *                     format: date-time
  *                     example: "2024-11-26T15:00:00.000Z"
- *                   hour:
+ *                   startHour:
  *                     type: string
  *                     example: "15:00"
+ *                   endHour:
+ *                     type: string
+ *                     example: "16:00"
  *                   userId:
  *                     type: string
  *                     example: "8892379a-707a-4655-8333-80ed4655113c"
@@ -124,9 +127,12 @@
  *                 date:
  *                   type: string
  *                   example: "2024-12-02T18:00:00.000Z"
- *                 hour:
+ *                 startHour:
  *                   type: string
  *                   example: "14:00"
+ *                 endHour:
+ *                   type: string
+ *                   example: "15:00"
  *                 userId:
  *                   type: string
  *                   example: "1ccd3f95-5d2c-49ba-93f5-079350d2cadb"
@@ -190,7 +196,10 @@
  *                 type: string
  *                 format: date-time
  *                 description: Data e hora do evento (formato ISO 8601)
- *               hour:
+ *               startHour:
+ *                 type: string
+ *                 description: Hora do evento
+ *               endHour:
  *                 type: string
  *                 description: Hora do evento
  *               sport:
@@ -200,7 +209,8 @@
  *               - title
  *               - description
  *               - date
- *               - hour
+ *               - startHour
+ *               - endHour
  *               - sport
  *     responses:
  *       201:
@@ -222,9 +232,12 @@
  *                 date:
  *                   type: string
  *                   example: "2024-12-02T18:00:00.000Z"
- *                 hour:
+ *                 startHour:
  *                   type: string
  *                   example: "14:00"
+ *                 endHour:
+ *                   type: string
+ *                   example: "15:00"
  *                 userId:
  *                   type: string
  *                   example: "1ccd3f95-5d2c-49ba-93f5-079350d2cadb"
@@ -296,7 +309,10 @@
  *                 type: string
  *                 format: date-time
  *                 description: Data e hora do evento (formato ISO 8601)
- *               hour:
+ *               startHour:
+ *                 type: string
+ *                 description: Hora do evento
+ *               endHour:
  *                 type: string
  *                 description: Hora do evento
  *               sport:
@@ -306,7 +322,8 @@
  *               - title
  *               - description
  *               - date
- *               - hour
+ *               - startHour
+ *               - endHour
  *               - sport
  *     responses:
  *       200:
@@ -328,9 +345,12 @@
  *                 date:
  *                   type: string
  *                   example: "2024-12-02T18:00:00.000Z"
- *                 hour:
+ *                 startHour:
  *                   type: string
  *                   example: "14:00"
+ *                 endHour:
+ *                   type: string
+ *                   example: "15:00"
  *                 userId:
  *                   type: string
  *                   example: "1ccd3f95-5d2c-49ba-93f5-079350d2cadb"

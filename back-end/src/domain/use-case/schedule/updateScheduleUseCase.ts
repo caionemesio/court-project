@@ -12,7 +12,8 @@ export class UpdateScheduleUseCase {
       description: string
       date: Date
       userId: string
-      hour: string
+      startHour: string
+      endHour: string
       sport: string
     },
   ): Promise<Schedule | null> {

@@ -9,7 +9,8 @@ export class CreateScheduleUseCase {
     description: string
     date: Date
     userId: string
-    hour: string
+    startHour: string
+    endHour: string
     sport: string
   }): Promise<Schedule> {
     const schedule = await this.scheduleRepository.create(data)

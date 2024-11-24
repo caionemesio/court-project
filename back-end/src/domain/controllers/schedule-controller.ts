@@ -23,7 +23,7 @@ export class ScheduleController {
     res: Response,
     next: NextFunction,
   ): Promise<Response> {
-    const { title, description, date, hour, sport } = req.body
+    const { title, description, date, startHour, endHour, sport } = req.body
     const userId = req.user.id
     if (!title) {
       throw new AppError('title is required')
@@ -37,7 +37,7 @@ export class ScheduleController {
       throw new AppError('date is required')
     }
 
-    if (!hour) {
+    if (!startHour || !endHour) {
       throw new AppError('hour is required')
     }
 
@@ -51,7 +51,8 @@ export class ScheduleController {
         description,
         date,
         userId,
-        hour,
+        startHour,
+        endHour,
         sport,
       })
 
@@ -104,7 +105,7 @@ export class ScheduleController {
     res: Response,
     next: NextFunction,
   ): Promise<Response> {
-    const { title, description, date, hour, sport } = req.body
+    const { title, description, date, startHour, endHour, sport } = req.body
     const userId = req.user.id
     const { id } = req.params
 
@@ -118,7 +119,8 @@ export class ScheduleController {
         description,
         date,
         userId,
-        hour,
+        startHour,
+        endHour,
         sport,
       })
 

@@ -28,7 +28,7 @@ export default class UserController {
       throw new AppError('name is required')
     }
 
-    if (!email) {
+    if (!email || !email.includes('@')) {
       throw new AppError('email is required')
     }
 

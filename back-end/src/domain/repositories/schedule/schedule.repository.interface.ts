@@ -10,6 +10,7 @@ export interface IScheduleRepositoryInterface extends IRepository<Schedule> {
     sport: string
   }): Promise<Schedule>
   findById(userId: string): Promise<Schedule[]>
+  findByStatus(status: string): Promise<Schedule[]>
   update(
     id,
     data: {

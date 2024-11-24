@@ -45,8 +45,14 @@ export class ScheduleController {
     res: Response,
     next: NextFunction,
   ): Promise<Response> {
+    const { status } = req.query
+    const { role } = req.user
+
     try {
-      const schedules = await this.findAllSchedulesUseCase.execute()
+      const schedules = await this.findAllSchedulesUseCase.execute(
+        status as string | undefined,
+        role,
+      )
       return res.status(200).json(schedules)
     } catch (error) {
       next(error)

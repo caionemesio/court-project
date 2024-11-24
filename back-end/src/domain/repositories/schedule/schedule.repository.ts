@@ -36,20 +36,22 @@ export class ScheduleRepository implements IScheduleRepositoryInterface {
 
     return newSchedule
   }
-  findByDate(date: Date): Promise<Schedule[]> {
-    const schedule = prisma.schedule.findMany({
-      where: {
-        date: date,
-      },
-    })
-    return schedule
-  }
   async findById(userId: string): Promise<Schedule[]> {
     const schedule = await prisma.schedule.findMany({
       where: {
         userId: userId,
       },
     })
+    return schedule
+  }
+
+  findByStatus(status: Status): Promise<Schedule[]> {
+    const schedule = prisma.schedule.findMany({
+      where: {
+        status: status,
+      },
+    })
+
     return schedule
   }
   async findAll(): Promise<

@@ -6,6 +6,7 @@ import { NotFoundError } from '../error/not-found'
 import { DeleteScheduleUseCase } from '../use-case/schedule/deleteScheduleUseCase'
 import { UpdateScheduleUseCase } from '../use-case/schedule/updateScheduleUseCase'
 import { UpdateStatusOfScheduleUseCase } from '../use-case/schedule/updateStatusOfScheduleUseCase'
+import AppError from '../error/app-error'
 
 export class ScheduleController {
   constructor(
@@ -24,6 +25,26 @@ export class ScheduleController {
   ): Promise<Response> {
     const { title, description, date, hour, sport } = req.body
     const userId = req.user.id
+    if (!title) {
+      throw new AppError('title is required')
+    }
+
+    if (!description) {
+      throw new AppError('description is required')
+    }
+
+    if (!date) {
+      throw new AppError('date is required')
+    }
+
+    if (!hour) {
+      throw new AppError('hour is required')
+    }
+
+    if (!sport) {
+      throw new AppError('sport is required')
+    }
+
     try {
       const schedule = await this.createScheduleUseCase.execute({
         title,

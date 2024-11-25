@@ -12,5 +12,18 @@ export default function useAuth() {
       return err.response.data.message;
     }
   }
-  return { SigIn }
+
+  async function register(values: { name: string, email: string, password: string }) {
+    try {
+      const response = await api.post("/register", {
+        name: values.name,
+        email: values.email,
+        password: values.password
+      })
+      return response.data;
+    } catch (err: any) {
+      return err.response.data.message;
+    }
+  }
+  return { SigIn, register }
 }

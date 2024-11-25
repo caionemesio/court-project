@@ -1,6 +1,5 @@
 import Home from "../pages/(unauth)/Home";
-import Login from "../pages/(unauth)/Login";
-import Register from "../pages/(unauth)/Register";
+import { ProtectedLogin, ProtectedRegister } from "./loggedDisableRoutes";
 
 export const validsRoutes = [
   {
@@ -9,10 +8,10 @@ export const validsRoutes = [
   },
   {
     path: "/cadastro",
-    element: <Register />,
+    element: <ProtectedRegister />,
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <ProtectedLogin />,
   },
 ];

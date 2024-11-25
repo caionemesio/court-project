@@ -1,7 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext<IAuthContextType | undefined>(undefined);
+const AuthContext = createContext<IAuthContextType>({
+  user: null,
+  login: () => {},
+  logout: () => {},
+});
 
 import { ReactNode } from "react";
 import { IAuthContextType, IUser } from "../types/IAuth";
@@ -39,4 +43,4 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuthContext = () => useContext(AuthContext);

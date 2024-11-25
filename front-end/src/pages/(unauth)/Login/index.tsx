@@ -4,10 +4,30 @@ import { useForm } from "react-hook-form";
 import TextField from "../../../components/formFields/TextField";
 import Button from "../../../components/Button";
 import { Link, Typography } from "@mui/material";
+import useAuth from "../../../services/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../../contexts/AuthContext";
 
 export default function Login() {
+  const { SigIn } = useAuth();
+  const { login } = useAuthContext();
+  const navigate = useNavigate();
+  const sigInMutation = useMutation({
+    mutationFn: SigIn,
+    onSuccess: (data) => {
+      if (login) {
+        login(data.user, data.token);
+      }
+      navigate("/");
+    },
+    onError: (error: any) => {
+      console.log(error);
+    },
+  });
   const { control, handleSubmit } = useForm({});
   function onSubmit(data: any) {
+    sigInMutation.mutate(data);
     console.log(data);
   }
   return (

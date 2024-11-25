@@ -5,20 +5,38 @@ import Button from "../../../components/Button";
 import Autentication from "../../../components/Autentication";
 import { zodResolver } from "@hookform/resolvers/zod";
 import registerSchema, { IRegister } from "./validations";
+import { useMutation } from "@tanstack/react-query";
+import useAuth from "../../../services/useAuth";
+import useNotifier from "../../../hooks/useNotifier";
 
 export default function Register() {
+  const { register } = useAuth();
+  const notify = useNotifier();
   const initialValues = {
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
+
   const { control, handleSubmit } = useForm({
     defaultValues: initialValues,
     resolver: zodResolver(registerSchema),
   });
 
+  const registerMutation = useMutation({
+    mutationFn: register,
+    onSuccess: () => {
+      notify("Usuário criado com sucesso", "success");
+    },
+    onError: (error: any) => {
+      notify("Erro ao criar usuário", "error");
+      console.log(error);
+    },
+  });
+
   function onSubmit(data: IRegister) {
+    registerMutation.mutate(data);
     console.log(data);
   }
 
@@ -35,13 +53,19 @@ export default function Register() {
         className="pt-4"
       >
         <Grid size={12}>
-          <TextField control={control} name="name" label="Nome" />
+          <TextField control={control} name="name" label="Nome" required />
         </Grid>
         <Grid size={12}>
-          <TextField control={control} name="email" label="E-mail" />
+          <TextField control={control} name="email" label="E-mail" required />
         </Grid>
         <Grid size={12}>
-          <TextField control={control} name="password" label="Senha" password />
+          <TextField
+            control={control}
+            name="password"
+            label="Senha"
+            password
+            required
+          />
         </Grid>
         <Grid size={12}>
           <TextField
@@ -49,6 +73,7 @@ export default function Register() {
             name="confirmPassword"
             label="Confirmar Senha"
             password
+            required
           />
         </Grid>
         <Grid size={12} className="flex justify-end">

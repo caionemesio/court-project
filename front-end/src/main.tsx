@@ -9,13 +9,23 @@ import RouterApp from "./routes/RouterApp.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { StyledEngineProvider } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NotifierProvider } from "./contexts/NotifierContext.tsx";
+import GlobalNotifier from "./helpers/Notifier/index.tsx";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <StyledEngineProvider injectFirst>
       <BrowserRouter>
         <AuthProvider>
-          <RouterApp />
+          <QueryClientProvider client={queryClient}>
+            <NotifierProvider>
+              <GlobalNotifier />
+              <RouterApp />
+            </NotifierProvider>
+          </QueryClientProvider>
         </AuthProvider>
       </BrowserRouter>
     </StyledEngineProvider>

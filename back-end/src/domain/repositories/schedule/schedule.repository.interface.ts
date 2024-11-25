@@ -6,10 +6,12 @@ export interface IScheduleRepositoryInterface extends IRepository<Schedule> {
     description: string
     date: Date
     userId: string
-    hour: string
+    startHour: string
+    endHour: string
     sport: string
   }): Promise<Schedule>
   findById(userId: string): Promise<Schedule[]>
+  findByStatus(status: string): Promise<Schedule[]>
   update(
     id,
     data: {
@@ -17,7 +19,8 @@ export interface IScheduleRepositoryInterface extends IRepository<Schedule> {
       description: string
       date: Date
       userId: string
-      hour: string
+      startHour: string
+      endHour: string
       sport: string
     },
   ): Promise<Schedule>

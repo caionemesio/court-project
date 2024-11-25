@@ -6,7 +6,9 @@ const envSchema = z.object({
     .enum(['development', 'production', 'test'])
     .default('development'),
   PORT: z.string().default('3000'),
+  SWAGGER_PORT: z.string().default('3001'),
   API_URL: z.string().default('http://localhost:3000'),
+  SWAGGER_URL: z.string().default('http://localhost:3001/api-docs'),
   JWT_SECRET: z.string().default('secret'),
 })
 

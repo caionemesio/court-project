@@ -28,7 +28,7 @@ export default class UserController {
       throw new AppError('name is required')
     }
 
-    if (!email) {
+    if (!email || !email.includes('@')) {
       throw new AppError('email is required')
     }
 
@@ -134,6 +134,14 @@ export default class UserController {
 
     if (!name && !email && !password) {
       throw new AppError('at least one field is required')
+    }
+
+    if (email && !email.includes('@')) {
+      throw new AppError('invalid email')
+    }
+
+    if (!name || name.length < 3) {
+      throw new AppError('name must have at least 3 characters')
     }
 
     if (password && password.length < 6) {

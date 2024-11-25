@@ -9,7 +9,8 @@ export class ScheduleRepository implements IScheduleRepositoryInterface {
     description: string
     date: Date
     userId: string
-    hour: string
+    startHour: string
+    endHour: string
     sport: string
   }): Promise<
     Schedule & { user: { id: string; email: string; name: string | null } }
@@ -20,7 +21,8 @@ export class ScheduleRepository implements IScheduleRepositoryInterface {
         description: data.description,
         date: data.date,
         userId: data.userId,
-        hour: data.hour,
+        startHour: data.startHour,
+        endHour: data.endHour,
         sport: data.sport,
       },
       include: {
@@ -36,20 +38,22 @@ export class ScheduleRepository implements IScheduleRepositoryInterface {
 
     return newSchedule
   }
-  findByDate(date: Date): Promise<Schedule[]> {
-    const schedule = prisma.schedule.findMany({
-      where: {
-        date: date,
-      },
-    })
-    return schedule
-  }
   async findById(userId: string): Promise<Schedule[]> {
     const schedule = await prisma.schedule.findMany({
       where: {
         userId: userId,
       },
     })
+    return schedule
+  }
+
+  findByStatus(status: Status): Promise<Schedule[]> {
+    const schedule = prisma.schedule.findMany({
+      where: {
+        status: status,
+      },
+    })
+
     return schedule
   }
   async findAll(): Promise<
@@ -77,7 +81,8 @@ export class ScheduleRepository implements IScheduleRepositoryInterface {
       description: string
       date: Date
       userId: string
-      hour: string
+      startHour: string
+      endHour: string
       sport: string
     },
   ): Promise<
@@ -92,7 +97,8 @@ export class ScheduleRepository implements IScheduleRepositoryInterface {
         description: data.description,
         date: data.date,
         userId: data.userId,
-        hour: data.hour,
+        startHour: data.startHour,
+        endHour: data.endHour,
         sport: data.sport,
       },
       include: {

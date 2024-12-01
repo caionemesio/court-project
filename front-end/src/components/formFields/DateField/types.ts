@@ -17,8 +17,8 @@ export interface IDateField {
   orientation?: 'row' | 'column';
   minDate?: Date;
   maxDate?: Date;
-  minTime?: Date;
-  maxTime?: Date;
+  mintime?: Date;
+  maxtime?: Date;
   shouldDisableDate?: (date: Date) => boolean;
   onMonthChange?: () => void;
   onViewChange?: () => void;

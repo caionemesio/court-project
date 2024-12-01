@@ -26,8 +26,8 @@ export default function DateField({
   orientation,
   minDate,
   maxDate,
-  minTime,
-  maxTime,
+  mintime,
+  maxtime,
   shouldDisableDate,
   customOnChange,
   onBlur,
@@ -86,8 +86,8 @@ export default function DateField({
             views={customViews}
             minDate={minDate}
             maxDate={maxDate}
-            minTime={minTime}
-            maxTime={maxTime}
+            mintime={mintime}
+            maxtime={maxtime}
             shouldDisableDate={shouldDisableDate}
             onChange={(value: Date) => {
               if (onChange instanceof Function) {

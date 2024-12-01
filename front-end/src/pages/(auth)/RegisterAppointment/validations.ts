@@ -7,37 +7,67 @@ function convertToDate(hour: string): Date {
   return date;
 }
 
-const invalidHourErrorMessage = "A hora inicial não pode ser maior que a hora final";
+const appointmentSchema = z
+  .object({
+    title: z
+      .string({ required_error: "Atividade é obrigatória" })
+      .min(1, "Atividade é obrigatória"),
+    description: z
+      .string({ required_error: "Descrição é obrigatória" })
+      .min(1, "Descrição é obrigatória"),
+    sport: z
+      .object({
+        value: z
+          .string({ required_error: "Esporte é obrigatório" })
+          .min(1, "Esporte é obrigatório"),
+      })
+      .nullable()
+      .refine((data) => data !== null, {
+        message: "Esporte é obrigatório",
+      }),
+    date: z
+      .date()
+      .nullable()
+      .refine((data) => data !== null, {
+        message: "Data é obrigatória",
+      }).transform((value) => (value ? value.toISOString() : null)),
 
-const appointmentSchema = z.object({
-  title: z.string({ required_error: "Atividade é obrigatória" }).min(1, "Atividade é obrigatória"),
-  description: z.string({ required_error: "Descrição é obrigatória" }).min(1, "Descrição é obrigatória"),
-  sport: z.object({
-    value: z.string({ required_error: "Esporte é obrigatório" }).min(1, "Esporte é obrigatório"),
-  }).refine((data) => data.value !== "", {
-    message: "Esporte é obrigatório",
-  }),
-  date: z.date({ required_error: "Data é obrigatória" }),
-  startHour: z.object({
-    label: z.string({ required_error: "Horário Inicial é obrigatório" }).min(1, "Horário Inicial é obrigatório"),
-  }).refine((data) => data.label !== "", {
-    message: "Horário Inicial é obrigatório",
-  }),
-  endHour: z.object({
-    label: z.string({ required_error: "Horário Final é obrigatório" }).min(1, "Horário Final é obrigatório"),
-  }).refine((data) => data.label !== "", {
-    message: "Horário Final é obrigatório",
-  }),
-}).refine((data) => {
-  const start = convertToDate(data.startHour.label);
-  const end = convertToDate(data.endHour.label);
+    startHour: z
+      .object({
+        label: z
+          .string({ required_error: "Horário Inicial é obrigatório" })
+          .min(1, "Horário Inicial é obrigatório"),
+      })
+      .nullable()
+      .refine((data) => data !== null, {
+        message: "Horário Inicial é obrigatória",
+      }),
+    endHour: z
+      .object({
+        label: z
+          .string({ required_error: "Horário Final é obrigatória" })
+          .min(1, "Horário Final é obrigatória"),
+      })
+      .nullable()
+      .refine((data) => data !== null, {
+        message: "Horário Final é obrigatória",
+      }),
+  })
+  .refine(
+    (data) => {
+      if (!data.startHour || !data.endHour) return true;
 
-  if (start >= end) {
-    return false;
-  }
-  return true;
-}, {
-  message: invalidHourErrorMessage,
-});
+      const start = convertToDate(data.startHour.label);
+      const end = convertToDate(data.endHour.label);
+      return start < end;
+    },
+    {
+      message: "Hora inicial inválida",
+      path: ["startHour"],
+    }
+  );
+
+type IAppointmentSchema = z.infer<typeof appointmentSchema>;
 
 export { appointmentSchema };
+export type { IAppointmentSchema };

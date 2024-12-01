@@ -17,7 +17,7 @@ export const validsRoutes = [
     element: <ProtectedLogin />,
   },
   {
-    path: "/fazer-agendamento",
+    path: "/agendamento",
     element: (
       <ProtectedRoute allowedRoles={["admin", "user"]}>
         <RegisterAppointment />

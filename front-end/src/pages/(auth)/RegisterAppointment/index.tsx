@@ -11,10 +11,11 @@ import { useMutation } from "@tanstack/react-query";
 import useSchedule from "../../../services/useSchedule";
 import useNotifier from "../../../hooks/useNotifier";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { appointmentSchema } from "./validations";
+import { appointmentSchema, IAppointmentSchema } from "./validations";
+import { Nullable } from "../../../types/Nullable";
 
 export default function RegisterAppointment() {
-  const initialValues = {
+  const initialValues: Nullable<IAppointmentSchema> = {
     title: "",
     description: "",
     sport: null,
@@ -39,8 +40,15 @@ export default function RegisterAppointment() {
     },
   });
 
-  function onSubmit(data: any) {
-    postScheduletmentMutation.mutate(data);
+  function onSubmit(data: Nullable<IAppointmentSchema>) {
+    const refactoredData = {
+      ...data,
+      startHour: data.startHour?.label,
+      endHour: data.endHour?.label,
+      sport: data.sport?.value,
+    };
+    console.log(refactoredData);
+    postScheduletmentMutation.mutate(refactoredData);
   }
 
   return (
@@ -59,20 +67,10 @@ export default function RegisterAppointment() {
           className="pt-4"
         >
           <Grid2 size={12}>
-            <TextField
-              control={control}
-              name="title"
-              label="Atividade"
-              // required
-            />
+            <TextField control={control} name="title" label="Atividade" />
           </Grid2>
           <Grid2 size={12}>
-            <TextField
-              control={control}
-              name="description"
-              label="Descrição"
-              // required
-            />
+            <TextField control={control} name="description" label="Descrição" />
           </Grid2>
           <Grid2 size={12}>
             <AutocompleteField
@@ -81,7 +79,6 @@ export default function RegisterAppointment() {
               control={control}
               options={mockingSports}
               optionLabelKey="label"
-              // required
             />
           </Grid2>
           <Grid2 size={12}>
@@ -89,7 +86,6 @@ export default function RegisterAppointment() {
               control={control}
               name="date"
               label="Data"
-              // required
               minDate={new Date()}
             />
           </Grid2>
@@ -100,7 +96,6 @@ export default function RegisterAppointment() {
               label="Horário Inicial"
               options={mockingHours}
               optionLabelKey="label"
-              // required
             />
           </Grid2>
           <Grid2 size={6}>
@@ -110,7 +105,6 @@ export default function RegisterAppointment() {
               label="Horário Final"
               options={mockingHours}
               optionLabelKey="label"
-              // required
             />
           </Grid2>
           <Grid2 size={12} className="flex justify-end">

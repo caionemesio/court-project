@@ -46,6 +46,7 @@ export default function RegisterAppointment() {
       startHour: data.startHour?.label,
       endHour: data.endHour?.label,
       sport: data.sport?.value,
+      status: "pending",
     };
     console.log(refactoredData);
     postScheduletmentMutation.mutate(refactoredData);

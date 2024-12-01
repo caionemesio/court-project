@@ -2,7 +2,8 @@ import Grid from "@mui/material/Grid2";
 import { useForm } from "react-hook-form";
 import TextField from "../../../components/formFields/TextField";
 import Button from "../../../components/Button";
-import Autentication from "../../../components/Autentication";
+import DefaultForm from "../../../components/DefaultForm";
+import WomanImage from "../../../assets/images/working-woman.png";
 import { zodResolver } from "@hookform/resolvers/zod";
 import registerSchema, { IRegister } from "./validations";
 import { useMutation } from "@tanstack/react-query";
@@ -41,9 +42,10 @@ export default function Register() {
   }
 
   return (
-    <Autentication
+    <DefaultForm
       title="Criar Conta"
       describe="Preencha os campos abaixo para criar sua conta"
+      image={WomanImage}
     >
       <Grid
         container
@@ -82,6 +84,6 @@ export default function Register() {
           </Button>
         </Grid>
       </Grid>
-    </Autentication>
+    </DefaultForm>
   );
 }

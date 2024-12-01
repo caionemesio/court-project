@@ -7,6 +7,9 @@ export const ProtectedRoute = ({
   allowedRoles,
 }: IProtectedRouteProps) => {
   const { user } = useAuthContext();
+  if (user === null) {
+    return <div>Carregando...</div>;
+  }
   if (!user) {
     return <Navigate to="/login" replace />;
   }

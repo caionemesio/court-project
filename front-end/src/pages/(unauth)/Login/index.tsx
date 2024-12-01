@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid2";
-import Autentication from "../../../components/Autentication";
+import DefaultForm from "../../../components/DefaultForm";
+import WomanImage from "../../../assets/images/working-woman.png";
 import { useForm } from "react-hook-form";
 import TextField from "../../../components/formFields/TextField";
 import Button from "../../../components/Button";
@@ -31,9 +32,10 @@ export default function Login() {
     console.log(data);
   }
   return (
-    <Autentication
+    <DefaultForm
       title="Bem-vindo de volta"
       describe="Faça login para acessar sua conta"
+      image={WomanImage}
     >
       <Grid
         container
@@ -62,6 +64,6 @@ export default function Login() {
           </Typography>
         </Grid>
       </Grid>
-    </Autentication>
+    </DefaultForm>
   );
 }

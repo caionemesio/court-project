@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ReactNode } from "react";
+import { IAuthContextType, IUser } from "../types/IAuth";
 
 const AuthContext = createContext<IAuthContextType>({
   user: null,
@@ -7,21 +9,23 @@ const AuthContext = createContext<IAuthContextType>({
   logout: () => {},
 });
 
-import { ReactNode } from "react";
-import { IAuthContextType, IUser } from "../types/IAuth";
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const storedUser = JSON.parse(localStorage.getItem("user")!);
+    const storedUser = localStorage.getItem("user");
 
     if (token && storedUser) {
-      setUser(storedUser);
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("Erro ao parsear usuário do localStorage:", error);
+      }
     }
-  }, [navigate]);
+  }, []);
 
   const login = (user: IUser, token: string) => {
     setUser(user);

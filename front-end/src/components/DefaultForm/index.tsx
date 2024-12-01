@@ -1,12 +1,13 @@
 import { Box, Typography } from "@mui/material";
-import WomanImage from "../../assets/images/working-woman.png";
-import { IAutenticationProps } from "./types";
+import { IDefaultFormProps } from "./types";
 
-export default function Autentication({
+export default function DefaultForm({
   children,
   title,
+  image,
+  imageStyle,
   describe,
-}: IAutenticationProps) {
+}: IDefaultFormProps) {
   return (
     <Box className="flex p-4 justify-around items-center h-[80vh]  ">
       <Box className="max-w-96 bg-white p-6 shadow-xl rounded-lg border border-gray-200">
@@ -18,7 +19,9 @@ export default function Autentication({
         </Box>
         {children}
       </Box>
-      <img src={WomanImage} alt="Mulher trabalhando no computador" />
+      {image && (
+        <Box component="img" src={image} alt="imagem" sx={imageStyle} />
+      )}
     </Box>
   );
 }

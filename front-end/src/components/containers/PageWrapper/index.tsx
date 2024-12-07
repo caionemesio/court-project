@@ -17,7 +17,7 @@ export default function PageWrapper({
     },
     {
       title: "Agendamentos",
-      path: "/agendamentos",
+      path: "/cadastrar-agendamento",
     },
   ];
   if (user) {

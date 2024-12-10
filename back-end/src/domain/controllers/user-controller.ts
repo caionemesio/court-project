@@ -112,7 +112,7 @@ export default class UserController {
     const { id } = req.params
 
     if (!id) {
-      throw new AppError('id is required')
+      throw new AppError('id is required. please provide a valid id')
     }
 
     try {

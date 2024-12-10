@@ -73,7 +73,7 @@ describe('UpdateUserUseCase', () => {
       updateUserUseCase.execute(newUser.id, invalidData),
     ).rejects.toThrow('invalid email')
 
-    invalidData.name = 'Valid Name'
+    invalidData.name = 'Valids Names'
     await expect(
       updateUserUseCase.execute(newUser.id, invalidData),
     ).rejects.toThrow('invalid email')

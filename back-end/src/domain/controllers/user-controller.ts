@@ -33,7 +33,9 @@ export default class UserController {
     }
 
     if (!password) {
-      throw new AppError('password is required')
+      throw new AppError(
+        'password is required. please provide a valid password',
+      )
     }
 
     if (password.length < 6) {

@@ -14,6 +14,19 @@ export class UpdateUserUseCase {
       throw new Error('User not found')
     }
 
+    // Validation logic
+    if (data.name && data.name.length < 3) {
+      throw new Error('name must have at least 3 characters')
+    }
+
+    if (data.email && !data.email.includes('@')) {
+      throw new Error('invalid email')
+    }
+
+    if (data.password && data.password.length < 6) {
+      throw new Error('password must have at least 6 characters')
+    }
+
     const updatedUser = await this.userRepository.update(id, data)
     return updatedUser
   }

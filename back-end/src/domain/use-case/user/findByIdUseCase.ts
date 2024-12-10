@@ -6,7 +6,7 @@ export class FindByIdUseCase {
   constructor(private userRepository: IUserRepositoryInterface) {}
 
   async execute(id: string): Promise<User> {
-    const user = await this.userRepository.findById(id)
+    const user = (await this.userRepository.findById(id)) as User
 
     if (!user) {
       throw new NotFoundError('User not found')

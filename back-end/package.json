@@ -7,7 +7,8 @@
     "dev": "npx dotenv-cli -e .env -- ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/infrastructure/http/server.ts",
     "docker": "docker-compose up -d",
     "seed": "npx prisma db seed",
-    "clear": "ts-node --transpile-only ./src/infrastructure/prisma/clear.ts"
+    "clear": "ts-node --transpile-only ./src/infrastructure/prisma/clear.ts",
+    "test": "npx dotenv-cli -e .env.test -- jest --runInBand"
   },
   "prisma": {
     "schema": "./src/infrastructure/prisma/schema.prisma",
